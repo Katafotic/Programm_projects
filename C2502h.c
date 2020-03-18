@@ -1,5 +1,5 @@
-#include "stdlib.h"
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
 void vecSwap(const int iLength, int *iVec)
 {
   int i, marker;
@@ -28,7 +28,7 @@ void printVector(const int iLength, int *iVec)
 }
 int main()
 {
-  int tmp, num=0;
+  int tmp, num=-1;
   FILE* inf;
 
   printf("C2502h\n");
@@ -50,7 +50,7 @@ int main()
       num = num+1;
     } while (!feof(inf));
     printf("%i \n",num );
-
+  //  т.к всегда происходит 1 итерация
   fclose(inf);
   if (num==0)
     {
@@ -60,7 +60,9 @@ int main()
   printf("%s\n","File will open" );
   inf = fopen("inputC2205h.txt", "rt");
   int Vector[num];
-  for (tmp=0; tmp < num; num++)   fscanf(inf, "%i", &Vector[tmp]);
+  printf("%s \n", "Vector type was created");
+  //  впоследующем цикле ошибка - segmentation fauld
+  for (tmp=0; tmp < num; tmp++)   fscanf(inf, "%i", &Vector[0]+tmp);
   printf("%s\n","File will open" );
 
   printVector(num, &Vector[0]);
