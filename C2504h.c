@@ -1,7 +1,7 @@
 //C2504h
 //3430302/90003
 //Biga V.S.
-//18.03.2020
+//17.03.2020
 //
 #include <stdlib.h>
 #include <stdio.h>
@@ -12,7 +12,6 @@ int main()
 {
   int i,j,counter=0;
   int *pArr[10], iArr[9];
-  FILE* outfile;
 
   printf("C2504h\n");
   printf("3430302/90003\n");
@@ -43,12 +42,14 @@ void savePnt(int *pArr)
 {
   int i;
   FILE* outfile=fopen("output2504h.txt","a+");//create file or open and write in end of file
-  printf("%s %s %s \n","    Adress","\t","     Value");
+  //printf("%s %c %s \n","    Adress",'\t',"     Value");
+  fprintf(outfile, "%s %c %s \n","    Adress",'\t',"     Value");
   for (i=0;i<9;i++)
     {
-      printf("%10p %s %10i \n",pArr+i,"\t",*(pArr+i) );
+      //printf("%10p %s %10i \n",pArr+i,"\t",*(pArr+i) );
+      fprintf(outfile, "%10p %s %10i \n",pArr+i,"\t",*(pArr+i) );
     }
-  printf("\n" );
+  fclose(outfile);
 }
 void swapInt(int *a, int *b, int *counter)
 {
