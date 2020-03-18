@@ -1,3 +1,8 @@
+//C2504h
+//3430302/90003
+//Biga V.S.
+//18.03.2020
+//
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -8,10 +13,16 @@ int main()
   int i,j,counter=0;
   int *pArr[10], iArr[9];
   FILE* outfile;
+
+  printf("C2504h\n");
+  printf("3430302/90003\n");
+  printf("Biga V.S.\n");
+  printf("18.03.2020\n");
+  printf("\n");
+
   srand (time(NULL));
   for (i=0; i<9; i++)
     {
-      srand(i);
       iArr[i]=rand()%1000;
       pArr[i]=&iArr[i];
     }
