@@ -1,37 +1,45 @@
-!F1402
-!3430302/90003
-!Biga V.S.
+ 	  PROGRAM F1402
+ 	  IMPLICIT NONE
+ 	  INTEGER :: M, N, S1, S2, tmp=0
+ 	  INTEGER i, j
+ 	  INTEGER, allocatable :: D(:,:)
 
-      program F1402
-      implicit none
-      INTEGER :: M,N,S1,S2,i,tmp
-      INTEGER ,ALLOCATABLE :: matrix(:,:)
-      !INTEGER MATRIX(M,N)
-      open (7, file="input1402.txt", IOSTAT=M)
-      IF (M/=0) THEN
-        PRINT *,'ERROR. Cannot open file.'
-      END IF
-      READ (7,*)  M, N
-      READ (7,*)  S1, S2
-      allocate ( matrix(M,N) )
-      tmp=1
-      DO i=1,M
-          DO tmp=1,N
-            READ (7,*) (matrix(i,tmp), tmp=1,N)
-          END DO
-      END DO
-      CLOSE (7)
+	  PRINT *, 'F1402'
+	  PRINT *, '3430302/90003'
+	  PRINT *, 'Biga V.S.'
+	  PRINT *, ''
 
-      !WRITE (*,'/') ''
-      !WRITE (*, 'A,/') ''
+	  OPEN (7, FILE='input1402.txt', ACTION='READ', IOSTAT=tmp)
+	  IF (tmp .NE. 0 ) THEN
+	 		PRINT *,'ERROR. Cannot open file.'
+			STOP
+	  END IF
 
-      tmp=1
-      DO i=1,M
+	  READ (7,*) M, N, S1, S2
+	  ALLOCATE (D(M,N))
 
-            print*,(matrix(i,tmp), tmp=1, N)
-            !WRITE (*,'/')
+ 	  DO i=1,M
+		 READ(7, *) (D(i,j), j = 1,N)
+	  END DO
 
-      END DO
+	  CALL Printer(M, N, D)
+	  DO i=1,N
+		 	tmp = D(S1,i)
+			D(S1,i) = D(S2,i)
+			D(S2,i) = tmp
+	  END DO
+	  PRINT *, ''
+
+	  CALL Printer(M, N, D)
+	  DEALLOCATE (D)
+
+          END PROGRAM
 
 
-      END PROGRAM F1402
+          SUBROUTINE Printer (M, N, D)
+	  INTEGER D(M,N)
+	  PRINT *, ''
+	  DO i=1,M
+	 		PRINT *, (D(i, j), j = 1, N)
+	  END DO
+          END SUBROUTINE Printer
