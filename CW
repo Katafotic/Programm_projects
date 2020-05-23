@@ -1,0 +1,51 @@
+        PROGRAM F1303
+        INTEGER ::ios=5
+        INTEGER(8) :: SUMM=0
+        WRITE (*,'(A5,/A9/)') 'F1303', 'Biga V.S.'
+
+        open(7,file="input1303.txt",  status='OLD', iostat=ios )
+        if (ios .NE. 0) STOP 'ERROR. FILE NOT FOUND.'
+        ! function SUMMARY read number, print on console and return number
+        PRINT *, 'FIRST NUMBER'
+        SUMM = SUMM + SUMMARY(ios)
+        PRINT *, 'SECOND NUMBER'
+        SUMM = SUMM + SUMMARY(ios)
+        PRINT *, 'SUM = ', SUMM
+	      close(7)
+        END PROGRAM F1303
+
+        FUNCTION SUMMARY (ios)
+          INTEGER  ios
+          INTEGER ARRAY(1000)
+          INTEGER  :: counter, i
+          CHARACTER  tmp
+          SUMMARY = 0
+          counter = 0
+
+          DO i=1, 2000
+              READ(7, "(A)", ADVANCE='NO', IOSTAT=ios) tmp
+              IF ( (ios .EQ. -2) .OR. (ios .EQ. -1) ) EXIT
+              IF (   ( IACHAR(tmp) >= IACHAR('0') )  .AND.  ( IACHAR(tmp) <= IACHAR('9') )   )  THEN
+                counter = counter + 1
+                ARRAY(counter) = IACHAR(tmp) - IACHAR('0')
+                WRITE(*, '(A1)', advance='NO') tmp
+              END IF
+
+          END DO
+
+          print *,
+          print *,
+          print *, 'Number:'
+          Do i=1,counter
+            WRITE(*, '(I1)', ADVANCED='NO')
+          End do
+          print *,
+          print *,
+          print *,
+
+            DO i=1,counter
+                SUMMARY = SUMMARY + ARRAY(i)*( 10**(counter-i ) )
+            END DO
+            PRINT *, ''
+            RETURN
+        END FUNCTION SUMMARY
